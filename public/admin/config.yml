@@ -2,6 +2,8 @@ backend:
   name: github
   repo: Marcus-dev-31/hugohermosilla
   branch: master
+  base_url: https://hugohermosilla.vercel.app
+  auth_endpoint: api/auth
 
 media_folder: public/images/works
 public_folder: /images/works
