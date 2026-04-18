@@ -35,27 +35,30 @@
 <script>
   const cursor = document.getElementById('cursor') as HTMLElement;
 
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
+  // No inicializar en dispositivos touch
+  if (window.matchMedia('(hover: hover)').matches) {
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-  const interactables = document.querySelectorAll('a, button, .work-item, .service-card');
-  interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-  });
+    const interactables = document.querySelectorAll('a, button, .work-item, .service-card');
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+    });
 
-  function animCursor() {
-    cursorX += (mouseX - cursorX) * 0.12;
-    cursorY += (mouseY - cursorY) * 0.12;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top  = cursorY + 'px';
-    requestAnimationFrame(animCursor);
+    function animCursor() {
+      cursorX += (mouseX - cursorX) * 0.12;
+      cursorY += (mouseY - cursorY) * 0.12;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top  = cursorY + 'px';
+      requestAnimationFrame(animCursor);
+    }
+
+    animCursor();
   }
-
-  animCursor();
 </script>
