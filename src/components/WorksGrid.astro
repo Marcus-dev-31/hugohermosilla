@@ -4,7 +4,9 @@
 import { getCollection } from 'astro:content';
 
 const works = await getCollection('works');
-const sorted = works.sort((a, b) => a.data.order - b.data.order);
+const sorted = works
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0,4);
 ---
 
 <section id="trabajos">
