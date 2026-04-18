@@ -173,25 +173,36 @@
 
 <script>
   const toggle  = document.getElementById('navToggle') as HTMLElement;
-  const overlay = document.getElementById('navOverlay') as HTMLElement;
-  const links   = document.querySelectorAll('.overlay-link');
+const overlay = document.getElementById('navOverlay') as HTMLElement;
+const links   = document.querySelectorAll('.overlay-link');
 
-  toggle.addEventListener('click', () => {
-    const isOpen = overlay.classList.contains('open');
-    overlay.classList.toggle('open');
-    toggle.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    overlay.setAttribute('aria-hidden', String(isOpen));
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-  });
+// Estado inicial — overlay cerrado
+links.forEach(link => {
+  (link as HTMLElement).setAttribute('tabindex', '-1');
+});
 
+toggle.addEventListener('click', () => {
+  const isOpen = overlay.classList.contains('open');
+  overlay.classList.toggle('open');
+  toggle.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(!isOpen));
+  overlay.setAttribute('aria-hidden', String(isOpen));
+  document.body.style.overflow = isOpen ? '' : 'hidden';
   links.forEach(link => {
-    link.addEventListener('click', () => {
-      overlay.classList.remove('open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+    (link as HTMLElement).setAttribute('tabindex', isOpen ? '-1' : '0');
+  });
+});
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    overlay.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    links.forEach(l => {
+      (l as HTMLElement).setAttribute('tabindex', '-1');
     });
   });
+});
 </script>
