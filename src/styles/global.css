@@ -98,7 +98,13 @@ body::after {
    respiren igual sin tener que repetirlo en cada componente.
 ──────────────────────────────────────────────────────────── */
 section {
-  padding: 7rem 3rem;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 769px) {
+  section {
+    padding: 7rem 3rem;
+  }
 }
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────

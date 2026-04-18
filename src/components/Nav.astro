@@ -35,6 +35,7 @@
 </div>
 
 <style>
+  /* ── BASE (mobile) ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -42,10 +43,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 3rem;
+    padding: 1.2rem 1.5rem;
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    background: rgba(8, 8, 8, 0.7);
+    background: rgba(8, 8, 8, 0.95);
   }
 
   .nav-logo {
@@ -60,38 +60,13 @@
 
   .nav-logo span { color: var(--red); }
 
-  .nav-links {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
+  /* Ocultos en mobile — aparecen en desktop */
+  .nav-links { display: none; }
+  .nav-badge  { display: none; }
 
-  .nav-links a {
-    color: var(--white-dim);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--white); }
-
-  .nav-badge {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--red);
-    border: 1px solid var(--border-red);
-    padding: 0.3rem 0.8rem;
-    text-transform: uppercase;
-  }
-
-  /* ── HAMBURGER ── */
+  /* ── HAMBURGER (visible en mobile) ── */
   .nav-toggle {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     cursor: pointer;
@@ -154,22 +129,45 @@
     text-transform: uppercase;
   }
 
-  /* ── MOBILE ── */
-  @media (max-width: 768px) {
+  /* ── DESKTOP ── */
+  @media (min-width: 769px) {
     nav {
-      padding: 1.2rem 1.5rem;
-      backdrop-filter: none;
-      background: rgba(8, 8, 8, 0.95);
+      padding: 1.5rem 3rem;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 8, 8, 0.7);
     }
 
-    .nav-links,
-    .nav-badge {
-      display: none;
-    }
-
-    .nav-toggle {
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
+
+    .nav-links a {
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-badge {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      border: 1px solid var(--border-red);
+      padding: 0.3rem 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .nav-toggle { display: none; }
   }
 </style>
 

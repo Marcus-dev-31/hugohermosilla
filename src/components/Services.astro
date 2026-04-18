@@ -46,21 +46,42 @@
 </section>
 
 <style>
+  /* ── BASE (mobile) ── */
   .services {
     background: var(--black-2);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    padding: 4rem 1.5rem;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 4rem;
+    height: 1px;
+    background: var(--red-dim);
   }
 
   .services-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    margin-top: 4rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
   .service-card {
-    padding: 3.5rem;
+    padding: 2.5rem 1.5rem;
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
@@ -144,22 +165,20 @@
     pointer-events: none;
   }
 
-  .section-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+  /* ── DESKTOP ── */
+  @media (min-width: 769px) {
+    .services {
+      padding: 7rem 3rem;
+    }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    max-width: 4rem;
-    height: 1px;
-    background: var(--red-dim);
+    .services-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 4rem;
+    }
+
+    .service-card {
+      padding: 3.5rem;
+    }
   }
 </style>

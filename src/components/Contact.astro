@@ -47,6 +47,7 @@
 </footer>
 
 <style>
+  /* ── BASE (mobile) ── */
   .section-label {
     font-size: 0.6rem;
     letter-spacing: 0.25em;
@@ -70,9 +71,9 @@
     background: var(--black);
     border-top: 1px solid var(--border);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 4rem 1.5rem;
   }
 
   .contact-cta {
@@ -153,12 +154,15 @@
     color: var(--white);
   }
 
+  /* ── FOOTER (mobile) ── */
   footer {
-    padding: 2rem 3rem;
+    padding: 2rem 1.5rem;
     border-top: 1px solid var(--border);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 1.5rem;
+    text-align: center;
     background: var(--black);
   }
 
@@ -180,6 +184,7 @@
   .footer-links {
     display: flex;
     gap: 1.5rem;
+    justify-content: center;
   }
 
   .footer-links a {
@@ -192,6 +197,36 @@
   }
 
   .footer-links a:hover { color: var(--red); }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 769px) {
+    .contact {
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      padding: 7rem 3rem;
+      align-items: center;
+    }
+
+    footer {
+      padding: 2rem 3rem;
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      gap: 0;
+    }
+
+    .footer-links {
+      justify-content: flex-end;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  .contact {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+}
 </style>
 
 <script>
