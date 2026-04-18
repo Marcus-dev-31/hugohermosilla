@@ -1,0 +1,55 @@
+---
+---
+
+<div class="cursor" id="cursor"></div>
+
+<style>
+  .cursor {
+    width: 10px;
+    height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+
+  .cursor.big {
+    width: 48px;
+    height: 48px;
+    background: var(--white);
+  }
+</style>
+
+<script>
+  const cursor = document.getElementById('cursor') as HTMLElement;
+
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  const interactables = document.querySelectorAll('a, button, .work-item, .service-card');
+  interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+
+  function animCursor() {
+    cursorX += (mouseX - cursorX) * 0.12;
+    cursorY += (mouseY - cursorY) * 0.12;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top  = cursorY + 'px';
+    requestAnimationFrame(animCursor);
+  }
+
+  animCursor();
+</script>

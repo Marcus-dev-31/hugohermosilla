@@ -1,0 +1,317 @@
+---
+---
+
+<section id="trabajos">
+  <div class="works-header reveal">
+    <div>
+      <div class="section-label">Trabajos recientes</div>
+      <h2 class="works-title">
+        <span>Lo que</span>
+        HAGO
+      </h2>
+    </div>
+    <a href="#contacto" class="see-all">Ver todo el trabajo →</a>
+  </div>
+
+  <div class="works-grid reveal reveal-delay-1">
+
+    <div class="work-item w1">
+      <div class="work-inner">
+        <div class="work-thumb">
+          <div class="work-thumb-bg"></div>
+          <div class="waveform" id="waveform"></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-meta-left">
+            <div class="work-cat">DJ Set</div>
+            <div class="work-name">Noche Negra Vol. 3</div>
+            <div class="work-year">2024 — Club Roxy</div>
+          </div>
+          <div class="work-arrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item w2">
+      <div class="work-inner">
+        <div class="work-thumb">
+          <div class="work-thumb-bg"></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-meta-left">
+            <div class="work-cat">Video</div>
+            <div class="work-name">Aftermovie Festival</div>
+            <div class="work-year">2024</div>
+          </div>
+          <div class="work-arrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item w3">
+      <div class="work-inner">
+        <div class="work-thumb">
+          <div class="work-thumb-bg"></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-meta-left">
+            <div class="work-cat">Reel</div>
+            <div class="work-name">Marca / Brand</div>
+            <div class="work-year">2024</div>
+          </div>
+          <div class="work-arrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item w4">
+      <div class="work-inner">
+        <div class="work-thumb">
+          <div class="work-thumb-bg"></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-meta-left">
+            <div class="work-cat">Mix</div>
+            <div class="work-name">Set 2 hs</div>
+            <div class="work-year">2023</div>
+          </div>
+          <div class="work-arrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .works-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+
+  .works-title {
+    font-family: var(--bebas);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+  }
+
+  .works-title span {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.35em;
+    color: var(--white-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .see-all {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .see-all:hover { color: var(--red); border-color: var(--red); }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2px;
+  }
+
+  .work-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--black-3);
+    cursor: none;
+  }
+
+  .work-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+  .work-item:nth-child(2) { grid-column: span 5; }
+  .work-item:nth-child(3) { grid-column: span 3; }
+  .work-item:nth-child(4) { grid-column: span 2; }
+
+  .work-inner {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-item:nth-child(1) .work-inner { min-height: 420px; }
+  .work-item:nth-child(2) .work-inner { min-height: 210px; }
+
+  .work-thumb {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .work-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
+  }
+
+  .work-thumb-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .work-item:hover .work-thumb-bg { transform: scale(1.06); }
+
+  .w1 .work-thumb-bg { background: linear-gradient(135deg, #1a0a05 0%, #3d1408 40%, #0a0a0a 100%); }
+  .w2 .work-thumb-bg { background: linear-gradient(135deg, #05101a 0%, #0d2a3d 40%, #0a0a0a 100%); }
+  .w3 .work-thumb-bg { background: linear-gradient(135deg, #0a1a05 0%, #1a3d0d 40%, #0a0a0a 100%); }
+  .w4 .work-thumb-bg { background: linear-gradient(135deg, #1a0514 0%, #3d0d2a 40%, #0a0a0a 100%); }
+
+  .waveform {
+    position: absolute;
+    bottom: 35%;
+    left: 5%;
+    right: 5%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .wave-bar {
+    flex: 1;
+    background: var(--red);
+    opacity: 0.5;
+    border-radius: 1px;
+    animation: wave-anim 1.2s ease-in-out infinite alternate;
+  }
+
+  @keyframes wave-anim {
+    from { transform: scaleY(var(--min)); }
+    to   { transform: scaleY(var(--max)); }
+  }
+
+  .work-meta {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .work-cat {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.4rem;
+  }
+
+  .work-name {
+    font-family: var(--bebas);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .work-year {
+    font-size: 0.6rem;
+    color: var(--white-dim);
+    letter-spacing: 0.12em;
+  }
+
+  .work-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(240, 237, 232, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+
+  .work-item:hover .work-arrow {
+    opacity: 1;
+    transform: translateY(0);
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  .work-arrow svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--white);
+    fill: none;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 4rem;
+    height: 1px;
+    background: var(--red-dim);
+  }
+</style>
+
+<script>
+  const waveformEl = document.getElementById('waveform');
+  if (waveformEl) {
+    for (let i = 0; i < 60; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'wave-bar';
+      const minH = 0.1 + Math.random() * 0.3;
+      const maxH = minH + 0.3 + Math.random() * 0.5;
+      bar.style.setProperty('--min', String(minH));
+      bar.style.setProperty('--max', String(maxH));
+      bar.style.animationDelay    = (Math.random() * 1.2) + 's';
+      bar.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      waveformEl.appendChild(bar);
+    }
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>

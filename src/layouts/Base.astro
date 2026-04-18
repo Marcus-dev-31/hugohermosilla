@@ -1,0 +1,46 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "DJ Hugo — Sets & Video",
+  description = "DJ y editor de video profesional en Buenos Aires. Sets en vivo, eventos privados, reels, aftermovies y contenido para marcas.",
+} = Astro.props;
+
+import "@fontsource/bebas-neue";
+import "@fontsource/dm-serif-display";
+import "@fontsource/dm-serif-display/400-italic.css";
+import "@fontsource/space-mono";
+import "@fontsource/space-mono/700.css";
+
+import "@styles/global.css";
+import Cursor from '@components/Cursor.astro';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/bebas-neue-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <Cursor />
+    <slot />
+  </body>
+</html>

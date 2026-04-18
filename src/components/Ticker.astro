@@ -1,0 +1,51 @@
+---
+---
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">
+      DJ Hugo <span>✦</span> Sets en vivo <span>✦</span> Edición de Video <span>✦</span> Reels & Content <span>✦</span> Aftermovies <span>✦</span> Eventos privados <span>✦</span> Disponible para contratar <span>✦</span>
+    </div>
+    <div class="ticker-item">
+      DJ Hugo <span>✦</span> Sets en vivo <span>✦</span> Edición de Video <span>✦</span> Reels & Content <span>✦</span> Aftermovies <span>✦</span> Eventos privados <span>✦</span> Disponible para contratar <span>✦</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--black-2);
+    padding: 1rem 0;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: ticker-move 20s linear infinite;
+  }
+
+  @keyframes ticker-move {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 2rem;
+    font-family: var(--bebas);
+    font-size: 0.9rem;
+    letter-spacing: 0.25em;
+    color: var(--white-dim);
+  }
+
+  .ticker-item span {
+    color: var(--red);
+    font-size: 1.2em;
+  }
+</style>

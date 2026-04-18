@@ -1,0 +1,70 @@
+---
+---
+
+<nav>
+  <a href="#" class="nav-logo"><span>.</span>HUGO</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-badge">Disponible 2026</div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(8, 8, 8, 0.7);
+  }
+
+  .nav-logo {
+    font-family: var(--bebas);
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--red);
+  }
+
+  .nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--white);
+  }
+
+  .nav-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    border: 1px solid var(--border-red);
+    padding: 0.3rem 0.8rem;
+    text-transform: uppercase;
+  }
+</style>

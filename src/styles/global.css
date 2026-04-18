@@ -1,0 +1,123 @@
+/* src/styles/global.css */
+
+/* ── DESIGN TOKENS ─────────────────────────────────────────
+   Custom properties definidas en :root = variables globales.
+   Vivir acá significa: si Hugo quiere cambiar el rojo,
+   se cambia en un solo lugar y se propaga a todo el sitio.
+──────────────────────────────────────────────────────────── */
+:root {
+  /* Colores */
+  --red:        #E8341A;
+  --red-dim:    #9E2410;
+  --red-glow:   rgba(232, 52, 26, 0.18);
+  --black:      #080808;
+  --black-2:    #101010;
+  --black-3:    #181818;
+  --white:      #F0EDE8;
+  --white-dim:  #8A8580;
+  --border:     rgba(240, 237, 232, 0.08);
+  --border-red: rgba(232, 52, 26, 0.3);
+
+  /* Tipografías — referencias a las fuentes instaladas con Fontsource */
+  --bebas: 'Bebas Neue', sans-serif;
+  --serif: 'DM Serif Display', serif;
+  --mono:  'Space Mono', monospace;
+}
+
+/* ── RESET ──────────────────────────────────────────────────
+   Cada browser tiene estilos por defecto distintos.
+   Sin reset, margin/padding/box-sizing varían entre Chrome,
+   Firefox y Safari. Esto los normaliza.
+──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── BASE ───────────────────────────────────────────────────
+   Estilos base del documento.
+──────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:   var(--black);
+  color:        var(--white);
+  font-family:  var(--mono);
+  overflow-x:   hidden;
+  cursor:       none; /* ocultamos el cursor nativo — el custom cursor lo reemplaza */
+}
+
+/* ── GRAIN OVERLAY ──────────────────────────────────────────
+   Textura de grano analógico sobre toda la página.
+   Está en body::before porque es decorativo y no necesita
+   un elemento HTML propio — pseudo-elemento = cero markup.
+   position: fixed + inset: 0 lo mantiene pegado al viewport
+   aunque el usuario haga scroll.
+   pointer-events: none para que no interfiera con clicks.
+──────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px;
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── SCANLINES ──────────────────────────────────────────────
+   Efecto de líneas horizontales tipo monitor CRT.
+   repeating-linear-gradient genera el patrón sin imagen.
+   z-index: 999 queda debajo del grain (1000) pero encima
+   del contenido — puramente estético, no bloquea nada.
+──────────────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ── ESTRUCTURA DE SECCIÓN ──────────────────────────────────
+   Padding uniforme para todas las secciones.
+   Lo definimos acá globalmente para que todas las secciones
+   respiren igual sin tener que repetirlo en cada componente.
+──────────────────────────────────────────────────────────── */
+section {
+  padding: 7rem 3rem;
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────────
+   Estado inicial: elementos invisibles y desplazados 30px.
+   Cuando IntersectionObserver detecta que el elemento entró
+   al viewport, agrega la clase .visible y la transición
+   lo lleva a su posición final.
+   La lógica JS va en el componente que la necesite.
+──────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s;  }
