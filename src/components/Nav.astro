@@ -3,19 +3,42 @@
 
 <nav>
   <a href="#" class="nav-logo"><span>.</span>HUGO</a>
+
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#trabajos">Trabajos</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <div class="nav-badge">Disponible 2026</div>
+
+  <div class="nav-badge">Disponible 2025</div>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <svg class="icon-menu" width="24" height="18" viewBox="0 0 24 18" fill="none">
+      <rect width="24" height="2" fill="#F0EDE8"/>
+      <rect y="8" width="24" height="2" fill="#F0EDE8"/>
+      <rect y="16" width="24" height="2" fill="#F0EDE8"/>
+    </svg>
+    <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <line x1="1" y1="1" x2="23" y2="23" stroke="#F0EDE8" stroke-width="2"/>
+      <line x1="23" y1="1" x2="1" y2="23" stroke="#F0EDE8" stroke-width="2"/>
+    </svg>
+  </button>
 </nav>
+
+<div class="nav-overlay" id="navOverlay" aria-hidden="true">
+  <ul class="nav-overlay-links">
+    <li><a href="#servicios" class="overlay-link">Servicios</a></li>
+    <li><a href="#trabajos" class="overlay-link">Trabajos</a></li>
+    <li><a href="#contacto" class="overlay-link">Contacto</a></li>
+  </ul>
+  <div class="nav-overlay-badge">Disponible 2025</div>
+</div>
 
 <style>
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,23 +54,23 @@
     letter-spacing: 0.12em;
     color: var(--white);
     text-decoration: none;
+    position: relative;
+    z-index: 200;
   }
 
-  .nav-logo span {
-    color: var(--red);
-  }
+  .nav-logo span { color: var(--red); }
 
   .nav-links {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
 
   .nav-links a {
     color: var(--white-dim);
@@ -55,9 +78,7 @@
     transition: color 0.2s;
   }
 
-  .nav-links a:hover {
-    color: var(--white);
-  }
+  .nav-links a:hover { color: var(--white); }
 
   .nav-badge {
     font-size: 0.65rem;
@@ -67,4 +88,112 @@
     padding: 0.3rem 0.8rem;
     text-transform: uppercase;
   }
+
+  /* ── HAMBURGER ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .icon-close { display: none; }
+
+  .nav-toggle.open .icon-menu  { display: none; }
+  .nav-toggle.open .icon-close { display: block; }
+
+  /* ── OVERLAY ── */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-overlay-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .overlay-link {
+    font-family: var(--bebas);
+    font-size: clamp(3rem, 15vw, 5rem);
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .overlay-link:hover { color: var(--red); }
+
+  .nav-overlay-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    border: 1px solid var(--border-red);
+    padding: 0.3rem 0.8rem;
+    text-transform: uppercase;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav {
+      padding: 1.2rem 1.5rem;
+      backdrop-filter: none;
+      background: rgba(8, 8, 8, 0.95);
+    }
+
+    .nav-links,
+    .nav-badge {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+  }
 </style>
+
+<script>
+  const toggle  = document.getElementById('navToggle') as HTMLElement;
+  const overlay = document.getElementById('navOverlay') as HTMLElement;
+  const links   = document.querySelectorAll('.overlay-link');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    toggle.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    overlay.setAttribute('aria-hidden', String(isOpen));
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
