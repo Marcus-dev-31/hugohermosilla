@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Marcus-dev-31/hugohermosilla
   branch: master
-  base_url: https://hugohermosilla.vercel.app
+  base_url: https://sveltia-cms-auth.marcussam3131.workers.dev
   auth_endpoint: api/auth
 
 media_folder: public/images/works
