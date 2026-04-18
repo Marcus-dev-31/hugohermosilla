@@ -1,43 +1,52 @@
 ---
+
 ---
 
 <section class="hero">
   <div class="hero-divider"></div>
 
   <div class="hero-side left">
-    <div class="hero-bg-text" aria-hidden="true">DJ</div>
+    <div class="hero-bg-text" aria-hidden="true" role="presentation">DJ</div>
     <div class="hero-tag">Sets / Eventos / Club</div>
     <h1 class="hero-title">
       <span class="glitch" data-text="HUGO">HUGO</span>
     </h1>
     <p class="hero-sub">
-      Más de 8 años construyendo pisos de baile.<br>
-      Desde techno crudo hasta sets de madrugada —
-      cada noche tiene su propia frecuencia.
+      Más de 8 años construyendo pisos de baile.<br />
+      Desde techno crudo hasta sets de madrugada — cada noche tiene su propia frecuencia.
     </p>
     <a href="#trabajos" class="hero-cta">
       Escuchar sets
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
     </a>
   </div>
 
   <div class="hero-side right">
-    <div class="hero-bg-text" aria-hidden="true">VID</div>
+    <div class="hero-bg-text" aria-hidden="true" role="presentation">VID</div>
     <div class="hero-tag">Edit / Motion / Reels</div>
     <h2 class="hero-title">
       <span class="glitch" data-text="EDIT">EDIT</span>
     </h2>
     <p class="hero-sub">
-      Edición de video con sensibilidad musical.<br>
-      Reels, aftermovies, contenido para marcas —
-      el corte que hace sentir cada segundo.
+      Edición de video con sensibilidad musical.<br />
+      Reels, aftermovies, contenido para marcas — el corte que hace sentir cada segundo.
     </p>
     <a href="#trabajos" class="hero-cta">
       Ver trabajos
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
     </a>
   </div>
@@ -59,22 +68,34 @@
 
   .hero-divider {
     position: absolute;
-    left: 50%; top: 0; bottom: 0;
+    left: 50%;
+    top: 0;
+    bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--red) 30%, var(--red) 70%, transparent);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--red) 30%,
+      var(--red) 70%,
+      transparent
+    );
     transform: translateX(-50%);
     z-index: 10;
   }
 
   .hero-divider::before {
-    content: '';
+    content: "";
     position: absolute;
-    left: 50%; top: 50%;
+    left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     background: var(--red);
     border-radius: 50%;
-    box-shadow: 0 0 20px var(--red), 0 0 40px var(--red-dim);
+    box-shadow:
+      0 0 20px var(--red),
+      0 0 40px var(--red-dim);
   }
 
   .hero-side {
@@ -87,9 +108,17 @@
     transition: background 0.5s;
   }
 
-  .hero-side:hover { background: rgba(232, 52, 26, 0.03); }
-  .hero-side.left  { padding-right: 5rem; align-items: flex-end; text-align: right; }
-  .hero-side.right { padding-left: 5rem; }
+  .hero-side:hover {
+    background: rgba(232, 52, 26, 0.03);
+  }
+  .hero-side.left {
+    padding-right: 5rem;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .hero-side.right {
+    padding-left: 5rem;
+  }
 
   .hero-tag {
     font-size: 0.6rem;
@@ -102,18 +131,25 @@
     gap: 0.8rem;
   }
 
-  .hero-side.left .hero-tag { justify-content: flex-end; }
+  .hero-side.left .hero-tag {
+    justify-content: flex-end;
+  }
 
   .hero-tag::before,
   .hero-tag::after {
-    content: '';
+    content: "";
     display: block;
-    width: 2rem; height: 1px;
+    width: 2rem;
+    height: 1px;
     background: var(--red);
   }
 
-  .hero-side.left .hero-tag::before  { display: none; }
-  .hero-side.right .hero-tag::after  { display: none; }
+  .hero-side.left .hero-tag::before {
+    display: none;
+  }
+  .hero-side.right .hero-tag::after {
+    display: none;
+  }
 
   .hero-title {
     font-family: var(--bebas);
@@ -133,7 +169,8 @@
   .hero-title .glitch::after {
     content: attr(data-text);
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
   }
@@ -152,17 +189,45 @@
   }
 
   @keyframes glitch-top {
-    0%, 90%, 100% { transform: translateX(0);   opacity: 0; }
-    92%           { transform: translateX(-4px); opacity: 1; }
-    94%           { transform: translateX(4px);  opacity: 1; }
-    96%           { transform: translateX(0);    opacity: 0; }
+    0%,
+    90%,
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    92% {
+      transform: translateX(-4px);
+      opacity: 1;
+    }
+    94% {
+      transform: translateX(4px);
+      opacity: 1;
+    }
+    96% {
+      transform: translateX(0);
+      opacity: 0;
+    }
   }
 
   @keyframes glitch-bot {
-    0%, 90%, 100% { transform: translateX(0);   opacity: 0; }
-    91%           { transform: translateX(5px);  opacity: 1; }
-    93%           { transform: translateX(-5px); opacity: 1; }
-    95%           { transform: translateX(0);    opacity: 0; }
+    0%,
+    90%,
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    91% {
+      transform: translateX(5px);
+      opacity: 1;
+    }
+    93% {
+      transform: translateX(-5px);
+      opacity: 1;
+    }
+    95% {
+      transform: translateX(0);
+      opacity: 0;
+    }
   }
 
   .hero-sub {
@@ -173,7 +238,9 @@
     max-width: 22rem;
   }
 
-  .hero-side.left .hero-sub { margin-left: auto; }
+  .hero-side.left .hero-sub {
+    margin-left: auto;
+  }
 
   .hero-cta {
     display: inline-flex;
@@ -187,11 +254,19 @@
     text-decoration: none;
     border-bottom: 1px solid var(--border-red);
     padding-bottom: 0.4rem;
-    transition: color 0.2s, border-color 0.2s;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
   }
 
-  .hero-cta:hover { color: var(--red); border-color: var(--red); }
-  .hero-cta svg   { width: 14px; height: 14px; }
+  .hero-cta:hover {
+    color: var(--red);
+    border-color: var(--red);
+  }
+  .hero-cta svg {
+    width: 14px;
+    height: 14px;
+  }
 
   .hero-bg-text {
     position: absolute;
@@ -205,8 +280,22 @@
     white-space: nowrap;
   }
 
-  .hero-side.left .hero-bg-text  { right: 2vw; bottom: -1vw; }
-  .hero-side.right .hero-bg-text { left: -2vw;  bottom: -1vw; }
+  .hero-side.left .hero-bg-text {
+    right: 2vw;
+    bottom: -1vw;
+  }
+  .hero-side.right .hero-bg-text {
+    left: -2vw;
+    bottom: -1vw;
+  }
+
+  .hero-side.left .hero-bg-text::before {
+    content: "DJ";
+  }
+
+  .hero-side.right .hero-bg-text::before {
+    content: "VID";
+  }
 
   .scroll-hint {
     position: absolute;
@@ -225,31 +314,46 @@
   }
 
   .scroll-line {
-    width: 1px; height: 3rem;
+    width: 1px;
+    height: 3rem;
     background: linear-gradient(to bottom, var(--red), transparent);
     animation: scroll-drop 1.8s ease-in-out infinite;
   }
 
   @keyframes scroll-drop {
-    0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
-    50%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
-    51%  { transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+      opacity: 1;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+      opacity: 1;
+    }
+    51% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+      opacity: 0;
+    }
   }
 </style>
 
 <script>
-  const waveformEl = document.getElementById('waveform');
+  const waveformEl = document.getElementById("waveform");
   if (waveformEl) {
     for (let i = 0; i < 60; i++) {
-      const bar = document.createElement('div');
-      bar.className = 'wave-bar';
+      const bar = document.createElement("div");
+      bar.className = "wave-bar";
       const minH = 0.1 + Math.random() * 0.3;
       const maxH = minH + 0.3 + Math.random() * 0.5;
-      bar.style.setProperty('--min', String(minH));
-      bar.style.setProperty('--max', String(maxH));
-      bar.style.animationDelay    = (Math.random() * 1.2) + 's';
-      bar.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      bar.style.setProperty("--min", String(minH));
+      bar.style.setProperty("--max", String(maxH));
+      bar.style.animationDelay = Math.random() * 1.2 + "s";
+      bar.style.animationDuration = 0.6 + Math.random() * 0.8 + "s";
       waveformEl.appendChild(bar);
     }
   }
