@@ -10,7 +10,7 @@ export default defineConfig({
 
   site: 'https://hugohermosilla.com',
 
-  output: 'hybrid',
+  output: 'static',
 
   compressHTML: true,
 
