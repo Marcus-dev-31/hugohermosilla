@@ -21,28 +21,40 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     {
       sorted.map((work, index) => (
         <div class={`work-item w${index + 1}`}>
-          <div class="work-inner">
-            <div class="work-thumb">
-              <div class="work-thumb-bg" />
-              {index === 0 && <div class="waveform" id="waveform" />}
-            </div>
-            <div class="work-meta">
-              <div class="work-meta-left">
-                <div class="work-cat">{work.data.category}</div>
-                <div class="work-name">{work.data.title}</div>
-                <div class="work-year">
-                  {work.data.year}
-                  {work.data.client ? ` — ${work.data.client}` : ""}
-                </div>
-              </div>
-              <div class="work-arrow">
-                <svg viewBox="0 0 24 24" stroke-width="2">
-                  <path d="M7 17L17 7M7 7h10v10" />
-                </svg>
-              </div>
-            </div>
-          </div>
+  <div class="work-inner">
+    <div class="work-thumb">
+      <div class="work-thumb-bg" />
+      {index === 0 && <div class="waveform" id="waveform" />}
+      {index === 0 && work.data.vimeoId && (
+        <button 
+          class="vimeo-trigger"
+          data-vimeo-id={work.data.vimeoId}
+          aria-label={`Reproducir ${work.data.title}`}
+        >
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="#F0EDE8" stroke-width="1" opacity="0.4"/>
+            <path d="M20 16l16 8-16 8V16z" fill="#F0EDE8"/>
+          </svg>
+        </button>
+      )}
+    </div>
+    <div class="work-meta">
+      <div class="work-meta-left">
+        <div class="work-cat">{work.data.category}</div>
+        <div class="work-name">{work.data.title}</div>
+        <div class="work-year">
+          {work.data.year}
+          {work.data.client ? ` — ${work.data.client}` : ""}
         </div>
+      </div>
+      <div class="work-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2">
+          <path d="M7 17L17 7M7 7h10v10" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
       ))
     }
   </div>
@@ -109,6 +121,8 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     color: var(--red);
     border-color: var(--red);
   }
+
+
 
   /* Grid mobile: una columna */
   .works-grid {
@@ -249,6 +263,35 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     fill: none;
   }
 
+  .vimeo-trigger {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  transition: opacity 0.2s;
+}
+
+.vimeo-trigger:hover { opacity: 0.8; }
+
+.vimeo-trigger.hidden { display: none; }
+
+.vimeo-embed {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+.vimeo-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
   /* ── TABLET ── */
 @media (min-width: 481px) and (max-width: 768px) {
   .works-grid {
@@ -324,4 +367,25 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     { threshold: 0.12 },
   );
   reveals.forEach((el) => observer.observe(el));
+
+  const vimeoTriggers = document.querySelectorAll('.vimeo-trigger');
+vimeoTriggers.forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const vimeoId = (trigger as HTMLElement).dataset.vimeoId;
+    const thumb   = trigger.closest('.work-thumb') as HTMLElement;
+
+    const embed = document.createElement('div');
+    embed.className = 'vimeo-embed';
+    embed.innerHTML = `
+      <iframe 
+        src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&color=E8341A&title=0&byline=0&portrait=0"
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+      </iframe>
+    `;
+
+    trigger.classList.add('hidden');
+    thumb.appendChild(embed);
+  });
+});
 </script>
