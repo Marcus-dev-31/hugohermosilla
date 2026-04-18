@@ -21,40 +21,47 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     {
       sorted.map((work, index) => (
         <div class={`work-item w${index + 1}`}>
-  <div class="work-inner">
-    <div class="work-thumb">
-      <div class="work-thumb-bg" />
-      {index === 0 && <div class="waveform" id="waveform" />}
-      {index === 0 && work.data.vimeoId && (
-        <button 
-          class="vimeo-trigger"
-          data-vimeo-id={work.data.vimeoId}
-          aria-label={`Reproducir ${work.data.title}`}
-        >
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="23" stroke="#F0EDE8" stroke-width="1" opacity="0.4"/>
-            <path d="M20 16l16 8-16 8V16z" fill="#F0EDE8"/>
-          </svg>
-        </button>
-      )}
-    </div>
-    <div class="work-meta">
-      <div class="work-meta-left">
-        <div class="work-cat">{work.data.category}</div>
-        <div class="work-name">{work.data.title}</div>
-        <div class="work-year">
-          {work.data.year}
-          {work.data.client ? ` — ${work.data.client}` : ""}
+          <div class="work-inner">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" />
+              {index === 0 && <div class="waveform" id="waveform" />}
+              {index === 0 && work.data.vimeoId && (
+                <button
+                  class="vimeo-trigger"
+                  data-vimeo-id={work.data.vimeoId}
+                  aria-label={`Reproducir ${work.data.title}`}
+                >
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle
+                      cx="24"
+                      cy="24"
+                      r="23"
+                      stroke="#F0EDE8"
+                      stroke-width="1"
+                      opacity="0.4"
+                    />
+                    <path d="M20 16l16 8-16 8V16z" fill="#F0EDE8" />
+                  </svg>
+                </button>
+              )}
+            </div>
+            <div class="work-meta">
+              <div class="work-meta-left">
+                <div class="work-cat">{work.data.category}</div>
+                <div class="work-name">{work.data.title}</div>
+                <div class="work-year">
+                  {work.data.year}
+                  {work.data.client ? ` — ${work.data.client}` : ""}
+                </div>
+              </div>
+              <div class="work-arrow">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                  <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="work-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2">
-          <path d="M7 17L17 7M7 7h10v10" />
-        </svg>
-      </div>
-    </div>
-  </div>
-</div>
       ))
     }
   </div>
@@ -113,7 +120,9 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.3rem;
-    transition: color 0.2s, border-color 0.2s;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
     white-space: nowrap;
   }
 
@@ -121,8 +130,6 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     color: var(--red);
     border-color: var(--red);
   }
-
-
 
   /* Grid mobile: una columna */
   .works-grid {
@@ -175,12 +182,22 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .work-item:hover .work-thumb-bg { transform: scale(1.06); }
+  .work-item:hover .work-thumb-bg {
+    transform: scale(1.06);
+  }
 
-  .w1 .work-thumb-bg { background: linear-gradient(135deg, #1a0a05 0%, #3d1408 40%, #0a0a0a 100%); }
-  .w2 .work-thumb-bg { background: linear-gradient(135deg, #05101a 0%, #0d2a3d 40%, #0a0a0a 100%); }
-  .w3 .work-thumb-bg { background: linear-gradient(135deg, #0a1a05 0%, #1a3d0d 40%, #0a0a0a 100%); }
-  .w4 .work-thumb-bg { background: linear-gradient(135deg, #1a0514 0%, #3d0d2a 40%, #0a0a0a 100%); }
+  .w1 .work-thumb-bg {
+    background: linear-gradient(135deg, #1a0a05 0%, #3d1408 40%, #0a0a0a 100%);
+  }
+  .w2 .work-thumb-bg {
+    background: linear-gradient(135deg, #05101a 0%, #0d2a3d 40%, #0a0a0a 100%);
+  }
+  .w3 .work-thumb-bg {
+    background: linear-gradient(135deg, #0a1a05 0%, #1a3d0d 40%, #0a0a0a 100%);
+  }
+  .w4 .work-thumb-bg {
+    background: linear-gradient(135deg, #1a0514 0%, #3d0d2a 40%, #0a0a0a 100%);
+  }
 
   .waveform {
     position: absolute;
@@ -202,8 +219,12 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
   }
 
   @keyframes wave-anim {
-    from { transform: scaleY(var(--min)); }
-    to   { transform: scaleY(var(--max)); }
+    from {
+      transform: scaleY(var(--min));
+    }
+    to {
+      transform: scaleY(var(--max));
+    }
   }
 
   .work-meta {
@@ -246,7 +267,10 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     flex-shrink: 0;
     opacity: 0;
     transform: translateY(6px);
-    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    transition:
+      opacity 0.3s,
+      transform 0.3s,
+      background 0.2s;
   }
 
   .work-item:hover .work-arrow {
@@ -264,55 +288,63 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
   }
 
   .vimeo-trigger {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 3;
-  transition: opacity 0.2s;
-}
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    transition: opacity 0.2s;
+  }
 
-.vimeo-trigger:hover { opacity: 0.8; }
+  .vimeo-trigger:hover {
+    opacity: 0.8;
+  }
 
-.vimeo-trigger.hidden { display: none; }
+  .vimeo-trigger.hidden {
+    display: none;
+  }
 
-.vimeo-embed {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-}
+  .vimeo-embed {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+  }
 
-.vimeo-embed iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+  .vimeo-embed iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: none;
+    display: block;
+  }
 
   /* ── TABLET ── */
-@media (min-width: 481px) and (max-width: 768px) {
-  .works-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
+  @media (min-width: 481px) and (max-width: 768px) {
+    .works-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
 
-  .work-item:nth-child(1),
-  .work-item:nth-child(2),
-  .work-item:nth-child(3),
-  .work-item:nth-child(4) {
-    grid-column: span 1;
-  }
+    .work-item:nth-child(1),
+    .work-item:nth-child(2),
+    .work-item:nth-child(3),
+    .work-item:nth-child(4) {
+      grid-column: span 1;
+    }
 
-  .work-item:nth-child(1) .work-inner,
-  .work-item:nth-child(2) .work-inner,
-  .work-item:nth-child(3) .work-inner,
-  .work-item:nth-child(4) .work-inner {
-    min-height: 220px;
+    .work-item:nth-child(1) .work-inner,
+    .work-item:nth-child(2) .work-inner,
+    .work-item:nth-child(3) .work-inner,
+    .work-item:nth-child(4) .work-inner {
+      min-height: 220px;
+    }
   }
-}
 
   /* ── DESKTOP ── */
   @media (min-width: 769px) {
@@ -323,7 +355,9 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
       margin-bottom: 3rem;
     }
 
-    .see-all { margin-bottom: 0.5rem; }
+    .see-all {
+      margin-bottom: 0.5rem;
+    }
 
     .works-grid {
       grid-template-columns: repeat(12, 1fr);
@@ -331,13 +365,26 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
       gap: 2px;
     }
 
-    .work-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
-    .work-item:nth-child(2) { grid-column: span 5; }
-    .work-item:nth-child(3) { grid-column: span 3; }
-    .work-item:nth-child(4) { grid-column: span 2; }
+    .work-item:nth-child(1) {
+      grid-column: span 7;
+      grid-row: span 2;
+    }
+    .work-item:nth-child(2) {
+      grid-column: span 5;
+    }
+    .work-item:nth-child(3) {
+      grid-column: span 3;
+    }
+    .work-item:nth-child(4) {
+      grid-column: span 2;
+    }
 
-    .work-item:nth-child(1) .work-inner { min-height: 420px; }
-    .work-item:nth-child(2) .work-inner { min-height: 210px; }
+    .work-item:nth-child(1) .work-inner {
+      min-height: 420px;
+    }
+    .work-item:nth-child(2) .work-inner {
+      min-height: 210px;
+    }
   }
 </style>
 
@@ -368,24 +415,27 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
   );
   reveals.forEach((el) => observer.observe(el));
 
-  const vimeoTriggers = document.querySelectorAll('.vimeo-trigger');
-vimeoTriggers.forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const vimeoId = (trigger as HTMLElement).dataset.vimeoId;
-    const thumb   = trigger.closest('.work-thumb') as HTMLElement;
+  const vimeoTriggers = document.querySelectorAll(".vimeo-trigger");
+  vimeoTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const vimeoId = (trigger as HTMLElement).dataset.vimeoId;
+      const thumb = trigger.closest(".work-thumb") as HTMLElement;
 
-    const embed = document.createElement('div');
-    embed.className = 'vimeo-embed';
-    embed.innerHTML = `
+      const waveform = thumb.querySelector(".waveform") as HTMLElement;
+      if (waveform) waveform.style.display = "none";
+
+      const embed = document.createElement("div");
+      embed.className = "vimeo-embed";
+      embed.innerHTML = `
       <iframe 
         src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&color=E8341A&title=0&byline=0&portrait=0"
-        allow="autoplay; fullscreen"
+        allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen>
       </iframe>
     `;
 
-    trigger.classList.add('hidden');
-    thumb.appendChild(embed);
+      trigger.classList.add("hidden");
+      thumb.appendChild(embed);
+    });
   });
-});
 </script>
