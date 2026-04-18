@@ -3,7 +3,6 @@ backend:
   repo: Marcus-dev-31/hugohermosilla
   branch: master
   base_url: https://sveltia-cms-auth.marcussam3131.workers.dev
-  auth_endpoint: api/auth
 
 media_folder: public/images/works
 public_folder: /images/works
@@ -17,13 +16,27 @@ collections:
     create: true
     delete: true
     fields:
-      - { name: title,         label: Título,         widget: string }
-      - { name: category,      label: Categoría,      widget: select,
-          options: [DJ Set, Video, Reel, Aftermovie, Mix] }
-      - { name: year,          label: Año,            widget: number }
-      - { name: client,        label: Cliente / Venue, widget: string,  required: false }
-      - { name: thumbnail,     label: Imagen,         widget: image }
-      - { name: vimeoId,       label: ID de Vimeo,    widget: string,  required: false }
-      - { name: soundcloudUrl, label: URL SoundCloud, widget: string,  required: false }
-      - { name: featured,      label: Destacado,      widget: boolean, default: false }
-      - { name: order,         label: Orden,          widget: number }
+      - { name: title, label: Título, widget: string }
+      - {
+          name: category,
+          label: Categoría,
+          widget: select,
+          options: [DJ Set, Video, Reel, Aftermovie, Mix],
+        }
+      - { name: year, label: Año, widget: number }
+      - {
+          name: client,
+          label: Cliente / Venue,
+          widget: string,
+          required: false,
+        }
+      - { name: thumbnail, label: Imagen, widget: image }
+      - { name: vimeoId, label: ID de Vimeo, widget: string, required: false }
+      - {
+          name: soundcloudUrl,
+          label: URL SoundCloud,
+          widget: string,
+          required: false,
+        }
+      - { name: featured, label: Destacado, widget: boolean, default: false }
+      - { name: order, label: Orden, widget: number }
