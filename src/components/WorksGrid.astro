@@ -80,7 +80,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 >
   <div class="modal-backdrop" id="modalBackdrop"></div>
   <div class="modal-container">
-    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar" tabindex="-1">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <line x1="1" y1="1" x2="23" y2="23" stroke="#F0EDE8" stroke-width="2"
         ></line>
@@ -514,6 +514,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
+    closeBtn.removeAttribute("tabindex");
     if (mainContent) mainContent.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "hidden";
     closeBtn.focus();
@@ -523,6 +524,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     content.innerHTML = "";
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
+    closeBtn.setAttribute("tabindex", "-1");
     if (mainContent) mainContent.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "";
   }
