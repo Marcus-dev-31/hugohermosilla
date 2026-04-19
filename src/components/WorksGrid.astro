@@ -20,17 +20,19 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
   <div class="works-grid reveal reveal-delay-1">
     {
       sorted.map((work, index) => (
-        <div class={`work-item w${index + 1}`}>
+        <button
+          class={`work-item w${index + 1}`}
+          data-vimeo-id={work.data.vimeoId || ""}
+          data-soundcloud-url={work.data.soundcloudUrl || ""}
+          data-title={work.data.title}
+          aria-label={`Ver ${work.data.title}`}
+        >
           <div class="work-inner">
             <div class="work-thumb">
               <div class="work-thumb-bg" />
               {index === 0 && <div class="waveform" id="waveform" />}
-              {index === 0 && work.data.vimeoId && (
-                <button
-                  class="vimeo-trigger"
-                  data-vimeo-id={work.data.vimeoId}
-                  aria-label={`Reproducir ${work.data.title}`}
-                >
+              {(work.data.vimeoId || work.data.soundcloudUrl) && (
+                <div class="play-icon" aria-hidden="true">
                   <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                     <circle
                       cx="24"
@@ -42,7 +44,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
                     />
                     <path d="M20 16l16 8-16 8V16z" fill="#F0EDE8" />
                   </svg>
-                </button>
+                </div>
               )}
             </div>
             <div class="work-meta">
@@ -54,18 +56,41 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
                   {work.data.client ? ` — ${work.data.client}` : ""}
                 </div>
               </div>
-              <div class="work-arrow">
+              <div class="work-arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" stroke-width="2">
                   <path d="M7 17L17 7M7 7h10v10" />
                 </svg>
               </div>
             </div>
           </div>
-        </div>
+        </button>
       ))
     }
   </div>
 </section>
+
+<!-- MODAL -->
+<div
+  class="modal"
+  id="worksModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Reproductor de trabajo"
+  aria-hidden="true"
+>
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-container">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <line x1="1" y1="1" x2="23" y2="23" stroke="#F0EDE8" stroke-width="2"
+        ></line>
+        <line x1="23" y1="1" x2="1" y2="23" stroke="#F0EDE8" stroke-width="2"
+        ></line>
+      </svg>
+    </button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
 
 <style>
   /* ── BASE (mobile) ── */
@@ -131,7 +156,6 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     border-color: var(--red);
   }
 
-  /* Grid mobile: una columna */
   .works-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,10 +166,16 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     position: relative;
     overflow: hidden;
     background: var(--black-3);
-    cursor: none;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    text-align: left;
   }
 
-  /* Mobile: todos los items igual altura */
+  .work-item:nth-child(1) {
+    aspect-ratio: 16 / 9;
+  }
+
   .work-inner {
     width: 100%;
     height: 100%;
@@ -155,7 +185,6 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     justify-content: flex-end;
     padding: 1.5rem;
     position: relative;
-    overflow: hidden;
   }
 
   .work-thumb {
@@ -174,11 +203,13 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
       rgba(8, 8, 8, 0.2) 60%,
       transparent 100%
     );
+    z-index: 1;
+    pointer-events: none;
   }
 
   .work-thumb-bg {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -208,6 +239,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     display: flex;
     align-items: center;
     gap: 2px;
+    z-index: 2;
   }
 
   .wave-bar {
@@ -227,9 +259,24 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     }
   }
 
+  .play-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .work-item:hover .play-icon {
+    opacity: 1;
+  }
+
   .work-meta {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -287,41 +334,67 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     fill: none;
   }
 
-  .vimeo-trigger {
-    position: absolute;
+  /* ── MODAL ── */
+  .modal {
+    position: fixed;
     inset: 0;
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.95);
+  }
+
+  .modal-container {
+    position: relative;
+    z-index: 1;
+    width: 90vw;
+    max-width: 1000px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    background: none;
     border: none;
     cursor: pointer;
-    z-index: 3;
+    padding: 0.5rem;
+    z-index: 2;
+    opacity: 0.7;
     transition: opacity 0.2s;
   }
 
-  .vimeo-trigger:hover {
-    opacity: 0.8;
+  .modal-close:hover {
+    opacity: 1;
   }
 
-  .vimeo-trigger.hidden {
-    display: none;
+  .modal-content {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
   }
 
-  .vimeo-embed {
+  .modal-content iframe {
     position: absolute;
     inset: 0;
-    z-index: 4;
     width: 100%;
     height: 100%;
-  }
-
-  .vimeo-embed iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
     border: none;
-    display: block;
   }
 
   /* ── TABLET ── */
@@ -366,6 +439,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     }
 
     .work-item:nth-child(1) {
+      aspect-ratio: unset;
       grid-column: span 7;
       grid-row: span 2;
     }
@@ -385,10 +459,15 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     .work-item:nth-child(2) .work-inner {
       min-height: 210px;
     }
+
+    .modal-container {
+      width: 80vw;
+    }
   }
 </style>
 
 <script>
+  // ── WAVEFORM ──
   const waveformEl = document.getElementById("waveform");
   if (waveformEl) {
     for (let i = 0; i < 60; i++) {
@@ -404,6 +483,7 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
     }
   }
 
+  // ── SCROLL REVEAL ──
   const reveals = document.querySelectorAll(".reveal");
   const observer = new IntersectionObserver(
     (entries) => {
@@ -415,27 +495,49 @@ const sorted = works.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
   );
   reveals.forEach((el) => observer.observe(el));
 
-  const vimeoTriggers = document.querySelectorAll(".vimeo-trigger");
-  vimeoTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      const vimeoId = (trigger as HTMLElement).dataset.vimeoId;
-      const thumb = trigger.closest(".work-thumb") as HTMLElement;
+  // ── MODAL ──
+  const modal = document.getElementById("worksModal") as HTMLElement;
+  const backdrop = document.getElementById("modalBackdrop") as HTMLElement;
+  const closeBtn = document.getElementById("modalClose") as HTMLElement;
+  const content = document.getElementById("modalContent") as HTMLElement;
+  const workItems = document.querySelectorAll(".work-item");
+  const mainContent = document.querySelector("main") as HTMLElement;
 
-      const waveform = thumb.querySelector(".waveform") as HTMLElement;
-      if (waveform) waveform.style.display = "none";
-
-      const embed = document.createElement("div");
-      embed.className = "vimeo-embed";
-      embed.innerHTML = `
-      <iframe 
+  function openModal(vimeoId: string) {
+    content.innerHTML = `
+      <iframe
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;display:block;"
         src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&color=E8341A&title=0&byline=0&portrait=0"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen>
       </iframe>
     `;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    if (mainContent) mainContent.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
 
-      trigger.classList.add("hidden");
-      thumb.appendChild(embed);
+  function closeModal() {
+    content.innerHTML = "";
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    if (mainContent) mainContent.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "";
+  }
+
+  workItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const vimeoId = (item as HTMLElement).dataset.vimeoId;
+      if (vimeoId) openModal(vimeoId);
     });
+  });
+
+  backdrop.addEventListener("click", closeModal);
+  closeBtn.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
   });
 </script>
