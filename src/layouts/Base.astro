@@ -1,22 +1,25 @@
 ---
 interface Props {
-  title?: string;
+  title?:       string;
   description?: string;
 }
 
 const {
-  title = "DJ Hugo — Sets & Video",
-  description = "DJ y editor de video profesional en Buenos Aires. Sets en vivo, eventos privados, reels, aftermovies y contenido para marcas.",
+  title       = 'DJ Hugo — Sets & Video',
+  description = 'DJ y editor de video profesional en Buenos Aires. Sets en vivo, eventos privados, reels, aftermovies y contenido para marcas.',
 } = Astro.props;
 
-import "@fontsource/bebas-neue";
-import "@fontsource/dm-serif-display";
-import "@fontsource/dm-serif-display/400-italic.css";
-import "@fontsource/space-mono";
-import "@fontsource/space-mono/700.css";
+const ogImage  = `${Astro.site}og-image.jpg`;
+const canonical = `${Astro.site}`;
 
-import "@styles/global.css";
-import Cursor from "@components/Cursor.astro";
+import '@fontsource/bebas-neue';
+import '@fontsource/dm-serif-display';
+import '@fontsource/dm-serif-display/400-italic.css';
+import '@fontsource/space-mono';
+import '@fontsource/space-mono/700.css';
+
+import '@styles/global.css';
+import Cursor from '@components/Cursor.astro';
 ---
 
 <!doctype html>
@@ -24,12 +27,32 @@ import Cursor from "@components/Cursor.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO base -->
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
+    <meta name="description"  content={description} />
+    <meta name="author"       content="Hugo Hermosilla" />
+    <meta name="robots"       content="index, follow" />
+    <link rel="canonical"     href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_AR" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:locale"      content="es_AR" />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:image"       content={ogImage} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="DJ Hugo — Sets & Video" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImage} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
