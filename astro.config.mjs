@@ -1,24 +1,24 @@
 // astro.config.mjs
 
-import { defineConfig } from 'astro/config';
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { defineConfig } from "astro/config";
+import { fileURLToPath } from "url";
+import path from "path";
+import sitemap from "@astrojs/sitemap";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  site: "https://hugohermosilla.com",
 
-  site: 'https://hugohermosilla.com',
-
-  output: 'static',
+  output: "static",
 
   compressHTML: true,
 
   build: {
-    format: 'file',
+    format: "file",
   },
 
-  integrations: [],
+  integrations: [sitemap()],
 
   vite: {
     server: {
@@ -26,10 +26,10 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
-        '@components': path.resolve(__dirname, './src/components'),
-        '@layouts': path.resolve(__dirname, './src/layouts'),
-        '@styles': path.resolve(__dirname, './src/styles'),
+        "@": path.resolve(__dirname, "./src"),
+        "@components": path.resolve(__dirname, "./src/components"),
+        "@layouts": path.resolve(__dirname, "./src/layouts"),
+        "@styles": path.resolve(__dirname, "./src/styles"),
       },
     },
   },
